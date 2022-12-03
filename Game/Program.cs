@@ -23,18 +23,18 @@ class players
         {
             Console.WriteLine("Введите характеристики персонажей, но учитывайте, что сумма всех характеристик не должна превышать 8! ");
             /////////////////////////////////////////первый игрок////////////////////////////////////////////////////////
-            Console.WriteLine("Введите ловкость Alex: ");
+            Console.WriteLine($"Введите ловкость {pers}");
             agility = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Введите силу Alex: ");
+            Console.WriteLine($"Введите силу {pers}");
             power = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Введите выносливость Alex: ");
+            Console.WriteLine($"Введите выносливость {pers}");
             stamina = Convert.ToInt32(Console.ReadLine());
             ///////////////////////////////////////Второй игрок///////////////////////////////////////////////////////////////
-            Console.WriteLine("Введите ловкость Bob: ");
+            Console.WriteLine($"Введите ловкость {pers1}");
             agility1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Введите силу Bob: ");
+            Console.WriteLine($"Введите силу {pers1}");
             power1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Введите выносливость Bob: ");
+            Console.WriteLine($"Введите выносливость {pers1}");
             stamina1 = Convert.ToInt32(Console.ReadLine());
         }
         catch
@@ -53,21 +53,95 @@ class players
          
          */
 
+        //// Система монетки ////
+        Random rnd = new Random();
+        int monetka = rnd.Next(1, 2);
+
+        int healpoint = 8; // Игрок 1
+        int healpoint1 = 8; // Игрок 2
+
+        if (agility == agility1)
+        {
+            monetka = rnd.Next(1, 2);
+                if(monetka == 1)
+                {
+                    precessing = "1";
+                     healpoint1 = healpoint1 - 2;
+                    Console.WriteLine($"HealPoint's {pers1} = {healpoint1}");
+                    stamina1 = stamina1 - 1;
+                }
+                else
+                {
+                    precessing = "1";
+                    healpoint = healpoint - 2;
+                    Console.WriteLine($"HealPoint's {pers} = {healpoint}");
+                    stamina = stamina - 1;
+                }
+        }
+        if(agility >= agility1)
+        {
+            precessing = "1";
+            healpoint1 = healpoint1 - 2;
+            Console.WriteLine($"HealPoint's {pers1} = {healpoint1}");
+            stamina = stamina - 1;
+        }
+        else
+        {
+            precessing = "1";
+            healpoint = healpoint - 2;
+            Console.WriteLine($"HealPoint's {pers} = {healpoint}");
+            stamina1 = stamina1 - 1;
+        }
+
         switch (precessing)
         {
             case "0":
-                //Console.WriteLine("Действий нету");
+                Console.WriteLine("Действий нету");
                 break;
 
             case "1":
                 if(stamina < stamina1 ) {
-                    Console.WriteLine("Игрок 2 нанёс удар в полную силу");
+                    Console.WriteLine($"В первом бою победил {pers}");
+                    Console.WriteLine($"{pers} нанёс удар в полную силу");
+                    Console.WriteLine("----------------------------------------------------------------------");
+                    Console.WriteLine($"Вынсливость игрока {pers}: {stamina}");
+                    Console.WriteLine($"HealPoint's игрока {pers}: {healpoint}");
+                    Console.WriteLine($"Сила игрока {pers}: {power}");
+                    Console.WriteLine($"Ловкость игрока {pers}: {agility}");
                 }
                 else
                 {
-                    Console.WriteLine("Игрок 1 нанёс удар в полную силу");
+                    Console.WriteLine($"В первом бою победил {pers1}");
+                    Console.WriteLine($"{pers1} нанёс удар в полную силу");
+                    Console.WriteLine("----------------------------------------------------------------------");
+                    Console.WriteLine($"Вынсливость игрока {pers1}: {stamina1}");
+                    Console.WriteLine($"HealPoint's игрока {pers1}: {healpoint1}");
+                    Console.WriteLine($"Сила игрока {pers1}: {power1}");
+                    Console.WriteLine($"Ловкость игрока {pers1}: {agility1}");
+
                 }
                 break;
         }
+    }
+}
+class battle
+{
+    public static void Main1()
+    {
+
+    }
+}
+class battle2
+{
+    public static void Main2()
+    {
+
+    }
+}
+class battle3
+{
+    public static void Main3()
+    {
+
     }
 }
