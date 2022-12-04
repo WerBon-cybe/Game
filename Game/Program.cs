@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Xml;
 
 public class players
@@ -62,7 +63,6 @@ public class players
             Console.WriteLine("Я же сказал чтобы было  8!!");
             players.Main();
         }
-        string precessing = "0"; // Будут задаваться значения боя;
         /* 
          0 - Нет действий
          1 - Удар 100%
@@ -91,62 +91,180 @@ public class players
 
         // Мозги первого бойца
 
-        }
-
-        
-    }
-}
-class brains1
-{
-    public static void Main1()
-    {
+        int healpoint_one = 50;
+        int healpoint_two = 50;
         string precessing = "0";
 
-        switch (precessing)
+        void BrainsOne()
         {
+            switch (precessing)
+            {
 
-            case "1": // Удар в полную силу
-                if (stamina >= 3)
-                {
-                    int hp;
-                    stamina = stamina - 1;
-                    hp = power;
-                    healpoint1 = healpoint1 - hp;
-                }
-                else // Если меньше или равно 3 то регенирируем стамину
-                {
-                    stamina = stamina + 1;
-                }
-                break;
+                case "1": // Удар в полную силу
+                    if (stamina >= 3)
+                    {
+                        int hp;
+                        stamina = stamina - 1;
+                        hp = power;
+                        healpoint_two = healpoint_two - hp;
+                    }
+                    else // Если меньше или равно 3 то регенирируем стамину
+                    {
+                        stamina = stamina + 1;
+                    }
+                    break;
 
-            case "2":
+                case "2":
 
-                if (stamina >= 3)
-                {
-                    int hp;
-                    double stamina2 = (double)stamina;
-                    stamina2 = stamina2 - 0.5; // Вычли пол силы
-                    hp = power / 2;
-                    healpoint = healpoint1 - hp;
-                }
-                else
-                {
-                    stamina = stamina + 1;
-                }
-                break;
+                    if (stamina >= 3)
+                    {
+                        int hp;
+                        double stamina2 = (double)stamina;
+                        stamina2 = stamina2 - 0.5; // Вычли пол силы
+                        hp = power / 2;
+                        healpoint_one = healpoint_one - hp;
+                    }
+                    else
+                    {
+                        stamina = stamina + 1;
+                    }
+                    break;
 
-            case "3":
-                if (agility <= 3)
-                {
-                    stamina = stamina + 1;
-                }
-                break;
+                case "3":
+                    if (agility <= 3)
+                    {
+                        stamina = stamina + 1;
+                    }
+                    break;
 
-            case "4":
-                Console.WriteLine("Игрок выставил защиту");
-                break;
+                case "4":
+                    Console.WriteLine("Игрок выставил защиту");
+                    break;
+            }
+
+            void BrainsTwo()
+            {
+                switch (precessing)
+                {
+
+                    case "1": // Удар в полную силу
+                        if (stamina >= 3)
+                        {
+                            int hp;
+                            stamina1 = stamina1 - 1;
+                            hp = power;
+                            healpoint_one = healpoint_one - hp;
+                        }
+                        else // Если меньше или равно 3 то регенирируем стамину
+                        {
+                            stamina1 = stamina1 + 1;
+                        }
+                        break;
+
+                    case "2":
+
+                        if (stamina >= 3)
+                        {
+                            int hp;
+                            double stamina2 = (double)stamina;
+                            stamina2 = stamina2 - 0.5; // Вычли пол силы
+                            hp = power / 2;
+                            healpoint_one = healpoint_one - hp;
+                        }
+                        else
+                        {
+                            stamina1 = stamina1 + 1;
+                        }
+                        break;
+
+                    case "3":
+                        if (agility <= 3)
+                        {
+                            stamina1 = stamina1 + 1;
+                        }
+                        break;
+
+                    case "4":
+                        Console.WriteLine("Игрок выставил защиту");
+                        break;
+                }
+
+                ///////////////////// ЛОГИКА БОЯ /////////////////////////////////
+
+                if (precessing == "1")
+                {
+                    if (agility == agility1)
+                    {
+                        rnd.Next();
+                        if (rnd.Next() == 1)
+                        {
+                            BrainsOne();
+                        }
+                        else
+                        {
+                            BrainsTwo();
+                        }
+                    }
+                }
+                if (precessing == "2")
+                {
+                    if (stamina <= 4)
+                    {
+                        // 2 игрок
+                        int hp;
+                        double stamina2 = (double)stamina;
+                        stamina2 = stamina2 - 0.5; // Вычли пол силы
+                        hp = power / 2;
+                        healpoint_one = healpoint_one - hp;
+                    }
+                    else
+                    {
+                        // 1 игрок
+                        int hp;
+                        double stamina2 = (double)stamina;
+                        stamina2 = stamina2 - 0.5; // Вычли пол силы
+                        hp = power / 2;
+                        healpoint_one = healpoint_one - hp;
+                    }
+                }
+                if (precessing == "3")
+                {
+                    if (agility <= 3)
+                    {
+                        stamina1 = stamina1 + 1;
+                    }
+                    else
+                    {
+                    }
+                }
+
+
+
+
+
+
+                ///////////////////////// БОЙ ///////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
         }
-
     }
 }
 
